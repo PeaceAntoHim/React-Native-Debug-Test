@@ -57,6 +57,7 @@ const Device = (props) => {
       };
    }, []);
 
+
       const getOneTimeLocation = () => {
          Geolocation.getCurrentPosition(
          //Will give you the current location
@@ -90,7 +91,6 @@ const Device = (props) => {
             const currentLongitude = position.coords.longitude;
             //getting the Latitude from the location json
             const currentLatitude = position.coords.latitude;
-            // console.log(currentLatitude);
             //Setting Longitude state
             setCurrentLongitude(currentLongitude);
             //Setting Latitude state

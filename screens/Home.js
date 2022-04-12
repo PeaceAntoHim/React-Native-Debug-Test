@@ -1,5 +1,5 @@
 // import React in our code
-import React from 'react';
+import React, {useEffect} from 'react';
 
 // import all the components we are going to use
 import {
@@ -13,9 +13,35 @@ import {
 } from 'react-native';
 
 //import all the components we are going to use.
-import Device from '../data/Device.js'; 
 
 const Home = ({ navigation }) => {
+
+  // Data Phone system
+  useEffect(() => {
+  const requestPhonePermission = async () => {
+    try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_PHONE_NUMBERS,
+          {
+            title: "Need your phone number",
+            message: "This app need you phone number to get attendance",
+            buttonNeutral: "Ask Me Later",
+            buttonNegative: "Cancel",
+            buttonPositive: "OK"
+          }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          //To Check, If Permission is granted
+          console.log("Permision Granted");
+        } else {
+          console.log("Permission Denied");
+        }
+      } catch(e) {
+        console.warn("e");
+      }
+    }
+    requestPhonePermission();
+  }, []);
 
   return (
    <SafeAreaView style={{flex: 1}}>

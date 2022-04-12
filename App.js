@@ -22,7 +22,6 @@ const App = () => {
           />
           <Stack.Screen name="Check" component={Check} />
         </Stack.Navigator>
-        {/* <Location /> */}
       </SafeAreaProvider>
     </NavigationContainer>
   );
