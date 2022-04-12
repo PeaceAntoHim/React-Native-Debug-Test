@@ -3,9 +3,11 @@ import { View, StyleSheet, ScrollView, Text, SafeAreaView} from 'react-native';
 import DeviceInfo, {getManufacturerSync} from 'react-native-device-info';
 
 const Check = ({route}) => {
+   let device ={}
    let deviceJSON = {}
-   deviceJSON.uniqueId = DeviceInfo.getUniqueId();
-   deviceJSON.systemName = DeviceInfo.getSystemName();
+   device.uniqueId = DeviceInfo.getUniqueId();
+   device.macAddress = DeviceInfo.getMacAddressSync();
+   device.systemName = DeviceInfo.getSystemName();
    deviceJSON.model = DeviceInfo.getModel();
    deviceJSON.brand = DeviceInfo.getBrand();
    deviceJSON.manufacturer = DeviceInfo.getManufacturerSync();
@@ -13,11 +15,10 @@ const Check = ({route}) => {
    deviceJSON.isLocationEnabled = DeviceInfo.isLocationEnabledSync();
    deviceJSON.serialNumber = DeviceInfo.getSerialNumberSync();
    deviceJSON.ipAddreas = DeviceInfo.getIpAddressSync();
-   deviceJSON.macAddress = DeviceInfo.getMacAddressSync();
    deviceJSON.phoneNumber = DeviceInfo.getPhoneNumberSync();
+   deviceJSON.device = device;
    deviceJSON.location = route.params.paramKey;
-
-   console.log(route.params.paramKey);
+   // console.log(route.params.paramKey);
    return (
       <SafeAreaView style={styles.container}>
          <View>

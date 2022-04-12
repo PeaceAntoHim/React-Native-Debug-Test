@@ -136,6 +136,7 @@ const Home = ({ navigation }) => {
       },
       );
    };
+   console.log(deviceJSON.latitude);
 
   return (
    <SafeAreaView style={{flex: 1}}>
@@ -169,14 +170,15 @@ const Home = ({ navigation }) => {
             <Button
               title="Button"
               onPress={() =>{
-                if(deviceJSON.latitude != null && deviceJSON.longitude != null)
-                { navigation.navigate('Check', {
-                    paramKey: deviceJSON})
+                if(currentLatitude != '' && currentLongitude != '') {
+                  navigation.navigate('Check', {
+                      paramKey: deviceJSON
+                  });
                 } else {
-                  alert("Please wait for a moment")
-                }}
-              }
-            />
+                    alert("Please wait for a moment")
+                  }}
+                }
+              />
           </View>
         </View>
         <Text
