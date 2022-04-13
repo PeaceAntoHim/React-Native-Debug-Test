@@ -7,7 +7,8 @@ import {
    PermissionsAndroid,
    RefreshControl,
    ScrollView,
-   ActivityIndicator
+   ActivityIndicator,
+   Text
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Geolocation from '@react-native-community/geolocation';
@@ -121,40 +122,60 @@ const Scan = ({ navigation }) => {
       wait(2000).then(() => setRefreshing(false));
    }, [])
 
-   const [loading, setLoading] = useState(false);   
+   // const [loading, setLoading] = useState(false);   
+   console.log(deviceJSON);
 
-   return (
-      // {if()}
-      <SafeAreaView style={styles.container}>
-         <View style={styles.sectionContainer}>
-            <ScrollView
-               refreshControl={
-                  <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-               }
-            >
-            <QRCodeScanner
-               style={{ height: '100%' }} 
-               reactivate={true}
-               showMarker={true}
-               ref={(node) => { this.scanner = node }}
-               onRead={() => {
-                  if (currentLatitude != '' && currentLongitude != '') {
-                     navigation.navigate('Check', {
-                        paramKey: deviceJSON
-                     });
-                     } else {
-                        <View style={[styles.container, styles.horizontal]}>
+   {if(currentLatitude != '' && currentLongitude != '') {
+      return (
+         <ScrollView
+         style={styles.refresh}
+         refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+         >
+         <SafeAreaView style={styles.container}>
+            <View style={styles.sectionContainer}>
+               <QRCodeScanner
+                  reactivate={true}
+                  showMarker={true}
+                  // ref={(node) => { this.scanner = node }}
+                  onRead={() => {
+                     // if (currentLatitude != '' && currentLongitude != '') {
+                        navigation.navigate('Check', {
+                           paramKey: deviceJSON
+                        });
+                  //       } else {
+                  //          alert('Please wait for the location to be fetched');
+                        }}
+                  // } 
+               />
+            </View>
+         </SafeAreaView>
+      </ScrollView>
+      );
+      } else {
+         // if(setTimeout <= 10000) {
+            return (
+               // setTimeout(() =>{
+               <SafeAreaView style={styles.container}>
+                  <View style={styles.sectionContainer}>
+                        <View>
                            <ActivityIndicator size="large" color="#0000ff" />
                         </View>
-                        // alert('Please wait for the location to be fetched');
-                     }}
-               } 
-            />
-            </ScrollView>
-         </View>
-      </SafeAreaView>
-   );
-}
+                  </View>
+               </SafeAreaView>
+               // }, 10000) 
+            );
+            // )} else {
+               // return (
+               //    <SafeAreaView style={styles.container}>
+               //       <View style={styles.sectionContainer}>
+               //          <Text>Your Location Turn Off</Text>
+               //       </View>
+               //    </SafeAreaView>
+               // )
+            // };
+         }}}
 
 const styles = StyleSheet.create({
    container: {
@@ -167,11 +188,10 @@ const styles = StyleSheet.create({
     sectionContainer: {
       marginTop: -30,
     },
-    horizontal: {
-      flexDirection: "row",
-      justifyContent: "space-around",
-      padding: 10
-    }
+    refresh: {
+      padding: 5,
+      marginTop: 70,
+   },
 
 })
 
