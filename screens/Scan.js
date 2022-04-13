@@ -125,7 +125,7 @@ const Scan = ({ navigation }) => {
    const [loading, setLoading] = useState(false);   
    console.log(deviceJSON);
 
-   {if(!loading) {
+   {if(loading) {
       return (
          <ScrollView
          style={styles.refresh}
@@ -141,12 +141,12 @@ const Scan = ({ navigation }) => {
                   // ref={(node) => { this.scanner = node }}
                   onRead={() => {
                      if (currentLatitude != '' && currentLongitude != '') {
+                        setLoading(true);
                         navigation.navigate('Check', {
                            paramKey: deviceJSON
                         });
-                        setLoading(false);
                      } else {
-                           setLoading(true);
+                           setLoading(false);
                            // alert('Please wait for the location to be fetched');
                         }}
                   } 
@@ -156,8 +156,6 @@ const Scan = ({ navigation }) => {
       </ScrollView>
       );
       } else {
-         // if(setTimeout <= 10000) {
-            
             return (
                // setTimeout(() =>{
                <SafeAreaView style={styles.container}>
