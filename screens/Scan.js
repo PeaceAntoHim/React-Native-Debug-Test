@@ -144,10 +144,10 @@ const Scan = ({ navigation }) => {
                         navigation.navigate('Check', {
                            paramKey: deviceJSON
                         });
-                        setLoading(true);
+                        setLoading(false);
                      } else {
-                           setLoading(false);
-                           alert('Please wait for the location to be fetched');
+                           setLoading(true);
+                           // alert('Please wait for the location to be fetched');
                         }}
                   } 
                />
