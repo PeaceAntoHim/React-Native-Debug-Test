@@ -134,6 +134,7 @@ const Home = ({ navigation }) => {
     );
  };
 
+ console.log(deviceJSON);
     
 
   return (
